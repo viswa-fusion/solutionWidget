@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+  <script src="https://live.zwidgets.com/js-sdk/1.2/ZohoEmbededAppSDK.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.4/dist/tesseract.min.js"></script>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Helvetica Neue", Helvetica, Arial, sans-serif;
+      touch-action: pan-y;
+      scrollbar-color: Transparent !important;
+      background-color: white !important;
+    }
+
+    .description .meta .category {
+      font-size: 15px !important;
+      color: rgba(22, 23, 24, 1) !important;
+    }
+
+    .description .meta .Audi-cat {
+      color: rgb(255, 255, 255) !important;
+    }
+
+    #mobile_top_bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ui.horizontal.divider {
+      color: black;
+    }
+
+    .ui.aligned.header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .left-aligned {
+      text-align: left;
+      margin-left: 10px;
+    }
+
+    .right-aligned {
+      text-align: right;
+      margin-right: 10px;
+    }
+
+    #achievement-header {
+      margin-top: -10px;
+    }
+
+    .column.achievements .ui.card {
+      border-radius: 9%;
+    }
+
+    .no-border {
+      box-shadow: none !important;
+    }
+
+    .image {
+      background: none !important;
+    }
+
+    .ui.grid>* {
+      padding: 6px !important;
+    }
+
+    .ui.card {
+      font-size: 1rem !important;
+      order: 0.5px solid #C4C6C7;
+      transform: none !important;
+    }
+
+    #globalSearch::placeholder {
+      color: #0000006b;
+    }
+
+    #achievement-section-one {
+      background: #9af7b480;
+    }
+
+    .column {
+      padding-top: unset !important;
+      -webkit-tap-highlight-color: transparent;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .ui.segment {
+      margin: 0px;
+    }
+
+    #outer_D {
+      border: none;
+      box-shadow: none;
+      padding: 0px !important;
+    }
+
+    .ui.bottom.attached {
+      border: none;
+      box-shadow: none;
+      display: flex;
+      margin: auto;
+      height: 74px;
+    }
+
+    .tab_icon {
+      display: none !important;
+    }
+
+    .mobile_icon {
+      display: block !important;
+    }
+
+    img.ui.avatar.image {
+      border-radius: 0px !important;
+    }
+
+    #globalSearch:focus {
+      outline: none;
+    }
+
+
+    .ui[class*="left icon"].input>input {
+      background: #E4E4E4;
+      border: none;
+      pointer-events: none;
+    }
+
+    a:hover {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #email {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 300px;
+    }
+
+    #top_attachment {
+      box-shadow: none;
+      border: none;
+      padding: 0px !important;
+    }
+
+    #name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 300px;
+    }
+
+    ::placeholder {
+      color: rgba(70, 71, 72, 1);
+    }
+
+    .search-small {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      fill: #aaa;
+    }
+
+    .ui.three.cards {
+      margin: auto;
+      padding-left: 8px;
+      height: 42px;
+    }
+
+    .size1 {
+      max-width: none !important;
+    }
+
+    .size {
+      height: 42px;
+      width: 42px;
+    }
+
+    .ui.three.cards>.card {
+      width: max-content;
+      margin: auto !important;
+    }
+
+    .outer_profile {
+      display: flex;
+      align-items: center;
+    }
+
+    .inner_profile {
+      display: flex;
+      align-items: center;
+    }
+
+
+
+    /* ------------------ Skoda ----------------------- */
+    .Skoda-uiCard {
+      border-radius: 16px !important;
+    }
+
+    .ui[class*="Skoda-input"].input>input {
+      border-radius: 30px !important;
+    }
+
+    .Skoda-avatarImg {
+      border-radius: 8px !important;
+    }
+
+    #cv-card-Skoda {
+      height: 120px;
+      margin: unset !important;
+      background: #F1F1F1;
+      box-shadow: none;
+      color: rgba(22, 23, 24, 1);
+      border: 0.5px solid rgba(196, 198, 199, 1)
+    }
+
+    .Skoda-bottom-box {
+      border-radius: 16px !important;
+    }
+
+    /* ------------------------------------------------ */
+
+
+
+    /* ------------------ VW ----------------------- */
+
+    .Volkswagen-uiCard {
+      border-radius: 16px !important;
+    }
+
+    .ui[class*="Volkswagen-input"].input>input {
+      border-radius: 8px !important;
+    }
+
+    .Volkswagen-avatarImg {
+      border-radius: 8px !important;
+    }
+
+    .Volkswagen-logoP {
+      margin: auto;
+    }
+
+    .Volkswagen-logoP-img {
+      margin-left: 26px;
+    }
+
+    #cv-card-Volkswagen {
+      height: 120px;
+      margin: unset !important;
+      background: #F1F1F1;
+      box-shadow: none;
+      color: rgb(0, 0, 0);
+    }
+
+    .Volkswagen-bottom-box {
+      border-radius: 16px !important;
+    }
+
+
+    /* ------------------------------------------------ */
+
+
+
+    /* ------------------ Audi ----------------------- */
+
+    .Audi-uiCard {
+      border-radius: 0px !important;
+    }
+
+    .ui[class*="Audi-input"].input>input {
+      border-radius: 0px !important;
+    }
+
+    .Audi-avatarImg {
+      border-radius: 0px !important;
+    }
+
+    .Audi-logoP {
+      margin: auto;
+      height: 25px !important;
+    }
+
+    .Audi-logoP-img {
+      margin-left: 26px;
+    }
+
+    #cv-card-Audi {
+      height: 120px;
+      margin: unset !important;
+      background: rgba(51, 51, 51, 1);
+      border: none !important;
+      color: rgba(229, 229, 229, 1) !important;
+      box-shadow: none;
+      /* background: #ffffff; */
+      /* color: rgba(22, 23, 24, 1); */
+      /* border: 1px solid rgba(196, 198, 199, 0.54); */
+    }
+
+    #Audi-card-icon-size {
+      box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ------------------------------------------------ */
+
+    .Volkswagen-bottom-box,
+    .Audi-bottom-box,
+    .Skoda-bottom-box {
+      background-color: rgba(255, 255, 255, 1) !important;
+    }
+
+
+    @media (min-width:850px) {
+      #outer_D {
+        margin: 0px 76px !important;
+      }
+
+      .ui.bottom.attached {
+        padding: 16px 88px !important;
+      }
+
+      .outer_profile {
+        margin: 24px 88px 12px 88px !important;
+      }
+
+      #mobile_top_bar {
+        padding: 0px 88px !important;
+      }
+    }
+
+    /* restrict audi light mode */
+    .Audi-body {
+      background-color: rgba(0, 0, 0, 1) !important;
+      color: rgba(229, 229, 229, 1) !important;
+    }
+
+    #top_attachment {
+      background: none;
+    }
+
+    .Audi-search {
+      background: rgba(51, 51, 51, 1) !important;
+    }
+
+    .Audi-search::placeholder {
+      color: #ffffff !important;
+    }
+
+    .Audi-bottom-box {
+      background-color: rgba(0, 0, 0, 1) !important;
+    }
+
+    #outer_D {
+      background: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .loader {
+        border: 3px solid #4C4C4C !important;
+        border-top: 3px solid #FFFFFF !important;
+      }
+
+      body {
+        color: rgba(229, 229, 229, 1);
+        background-color: rgb(0, 0, 0) !important;
+      }
+
+      .Volkswagen-body {
+        background-color: #001E50 !important;
+      }
+
+      /* .Audi-body {
+        background-color: rgba(0, 0, 0, 1) !important;
+      } */
+
+      .Skoda-body {
+        background-color: rgba(22, 23, 24, 1) !important;
+      }
+
+      /* #top_attachment {
+        background: none;
+      } */
+
+      /* #outer_D {
+        background: none;
+      } */
+
+    
+      #cv-card-Skoda,
+      #cv-card-Audi {
+        color: rgba(229, 229, 229, 1) !important;
+      }
+
+      #cv-card-Volkswagen {
+        color: rgba(0, 30, 80, 1) !important;
+      }
+
+      #cv-card-Audi {
+        background: rgba(51, 51, 51, 1);
+        border: none !important;
+      }
+
+      #cv-card-Skoda {
+        background: rgba(35, 36, 37, 1);
+        border: none !important;
+      }
+
+      #cv-card-Volkswagen {
+        background: #FFFFFF !important;
+      }
+
+
+      .description .meta .category {
+        color: rgba(229, 229, 229, 1) !important;
+      }
+
+      .description .meta .Volkswagen-cat {
+        color: rgba(0, 30, 80, 1) !important;
+      }
+
+      /* #mobile_top_bar {
+        background-color: black;
+      } */
+
+      .Volkswagen-search {
+        background: rgba(255, 255, 255, 0.1) !important;
+      }
+
+      .Skoda-search {
+        background: rgba(35, 36, 37, 1) !important;
+      }
+
+      /* .Audi-search {
+        background: rgba(51, 51, 51, 1) !important;
+      } */
+
+      /* rgba(35, 36, 37, 1) */
+
+      ::placeholder {
+        color: rgba(229, 229, 229, 1) !important;
+      }
+
+      .Volkswagen-bottom-box {
+        background-color: rgba(0, 30, 80, 1) !important;
+    }
+
+      /* .Audi-bottom-box {
+        background-color: rgba(0, 0, 0, 1) !important;
+      } */
+
+      .Skoda-bottom-box {
+        background-color: rgba(22, 23, 24, 1) !important;
+      }
+
+    }
+
+    @media (prefers-color-scheme: dark) and (max-width:650px) {
+      .outer_box {
+        background-color: unset !important;
+      }
+
+      /* .Audi-bottom-box {
+        border-top: 1px solid rgba(76, 76, 76, 1) !important;
+      } */
+    }
+
+    @media (min-width:651px) {
+
+      .ui[class*="two column"].grid>.column:not(.row),
+      .ui[class*="two column"].grid>.row>.column {
+        width: calc(100% / 3);
+      }
+
+      .ui.three.cards {
+        gap: 8px;
+      }
+
+      #outer_D {
+        border: none;
+        box-shadow: none;
+        margin: 0px 12px;
+      }
+
+      .ui.bottom.attached {
+        padding: 16px 24px;
+        background: none;
+      }
+
+      #mobile_top_bar {
+        height: 64px !important;
+        padding: 0px 24px;
+      }
+
+      .outer_profile {
+        height: 64px;
+        margin: 24px 24px 12px 24px;
+      }
+
+      span.ui.left.floated.content {
+        height: 64px;
+      }
+
+      .ui.grid>* {
+        padding: 12px !important;
+      }
+
+      #myImage {
+        height: 64px;
+        width: 64px;
+      }
+
+      #name {
+        font-size: 24px !important;
+      }
+
+      #email {
+        font-size: 18px !important;
+        max-width: 500px !important;
+      }
+
+    }
+
+    .ui[class*="left icon"].input {
+      flex-grow: 1;
+      min-width: 100px;
+    }
+
+    /* @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #333 !important;
+        color: #fff !important;
+      }
+    } */
+
+    @media (min-width:1100px) {
+
+
+      .ui[class*="two column"].grid>.column:not(.row),
+      .ui[class*="two column"].grid>.row>.column {
+        width: 25%;
+      }
+
+      .ui.three.cards {
+        gap: 0px !important;
+      }
+
+      #outer_D {
+        border: none;
+        box-shadow: none;
+        margin: 24px 80px;
+      }
+
+      .tab_icon {
+        display: block !important;
+      }
+
+      .mobile_icon {
+        display: none !important;
+      }
+
+      #email {
+        max-width: 300px !important;
+      }
+    }
+
+    @media (max-width:650px) {
+
+      #top_attachment {
+        margin-top: 16px;
+      }
+
+      .Audi-bottom-box {
+        border-top: 1px solid rgba(76, 76, 76, 1) !important;
+      }
+
+      .ui[class*="two column"].grid>.column:not(.row),
+      .ui[class*="two column"].grid>.row>.column {
+        width: 50%;
+      }
+
+      #outer_D {
+        padding: 0px 8px !important;
+      }
+
+      .outer_box {
+        border-radius: 10px 10px 0 0;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 999999999999;
+      }
+
+      .ui.bottom.attached {
+        box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
+        background: none;
+      }
+
+      #dashboard-container {
+        padding-bottom: 88px;
+      }
+
+      #mobile_top_bar {
+        height: 44px;
+        padding: 0px 16px !important;
+      }
+
+      .outer_profile {
+        height: 80px;
+        margin: 0px 16px;
+      }
+
+      span.ui.left.floated.content {
+        height: 48px;
+      }
+
+      #myImage {
+        height: 48px;
+        width: 48px;
+      }
+    }
+
+    .loader {
+      border: 3px solid #D9D9D9;
+      border-top: 3px solid #000000;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: spin 1s linear infinite;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin-top: -30px;
+      margin-left: -30px;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    #content {
+      display: none;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+</head>
+
+<body id="mBody">
+  <div id="loader" class="loader"></div>
+  <div id="content">
+    <div class="ui top attached segment" id="top_attachment">
+      <div class="mobile_icon">
+        <div id="mobile_top_bar">
+          <div id="logoP" style="display: flex;">
+            <img id="logoMobile" src="" />
+          </div>
+          <div style="height: 22px;">
+            <a href="https://dealers.zohosolution.in/crm/search?searchword=" target="_blank">
+              <img id="searchI" src="" style="height: 22px; visibility: hidden;" />
+            </a>
+            <!-- <img src="notification.png" style="height: 45px; padding-top: 11px; padding-bottom: 11px;" /> -->
+          </div>
+        </div>
+      </div>
+      <div class="outer_profile">
+        <div class="inner_profile">
+          <span class="ui left floated content">
+            <img id="myImage" alt="Avatar.png" src="" />
+          </span>
+          <span style="padding-left: 8px">
+            <div class="ui header" id="name" style="margin-bottom: 4px; font-size: 17px; color: unset;"></div>
+            <div class="ui meta" id="email" style="font-size: 15px;"></div>
+          </span>
+          <div class="tab_icon" style="position: absolute; right: 0; left: 0;">
+            <img id="logoTab" src="" style="margin: auto; display: flex;" />
+          </div>
+          <div class="tab_icon" style="height: 24px;">
+            <a href="https://dealers.zohosolution.in/crm/search?searchword=" target="_blank">
+              <img id="searchJ" src="" style="height: 24px; position: absolute; right: 88px; visibility: hidden;" />
+            </a>
+            <!-- <img src="notification.png" style="height: 45px; padding-top: 11px; padding-bottom: 11px;" /> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui segment" id="outer_D">
+      <!-- <div class="ui large header">My Dashboard</div> -->
+      <div class="ui two column padded grid" id="dashboard-container">
+      </div>
+      <!-- <div class="ui large header">My Achievements</div>
+      <div class="ui one column padded grid" id="achievements-container">
+        <div class="column achievements">
+          <div
+            class="ui card"
+            style="
+              border: none !important;
+              background-color: transparent !important;
+              width: 100%;
+              border-radius: 16px !important;
+            ">
+            <img src="Month-1.png" alt="" />
+          </div>
+
+          <div
+            class="ui card"
+            style="
+              border: none !important;
+              background-color: transparent !important;
+              width: 100%;
+              border-radius: 16px !important;
+            ">
+            <img src="Week-1.png" alt="" />
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="outer_box">
+      <div class="ui bottom attached segment" id="bottom-box">
+        <div class="ui left icon input" id="search_field">
+          <input type="text" placeholder="Search" id="globalSearch" />
+          <img src="" id="searchSmall" class="search-small">
+        </div>
+        <div class="ui three cards">
+          <!-- <div class="ui card no-border image" onclick="scanLicense()">
+            <img src="add_lead.svg" class="mobile_icon size" />
+            <img src="add_lead.svg" class="tab_icon size1" />
+          </div> -->
+          <div class="ui card no-border image" onclick="addCustomer()">
+            <img id="addLead" src="add_lead-green.svg" style="border-radius: 0px !important;" />
+          </div>
+          <!-- <div class="ui card no-border image" onclick="addComplaint()">
+            <img src="add_complaint-mobile.svg" class="mobile_icon size" />
+            <img src="add_complaint-tab.svg" class="tab_icon size1" />
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script>
+
+    var Brand;
+    var apiPermissionError;
+    let avatarImages = [];
+    document.getElementById('search_field').addEventListener('click', function () {
+      window.open('https://dealers.zohosolution.in/crm/search?searchword=&modules=Leads', '_blank');
+    });
+
+    var jsonData = [
+      {
+        uniqueId: 1,
+        href: "https://dealers.zohosolution.in/crm/tab/Leads/custom-view/3660000002794541/list",
+        iconSrc: "1-green.svg",
+        cvId: "3660000002794541",
+        moduleName: "Leads",
+        title: ["New Leads"],
+        count: "NA",
+        permission: true
+      },
+      {
+        uniqueId: 2,
+        href: "https://dealers.zohosolution.in/crm/tab/Potentials/custom-view/3660000002999908/list",
+        iconSrc: "2-green.svg",
+        cvId: "3660000002999908",
+        moduleName: "Potentials",
+        title: ["Qualified Leads"],
+        count: "NA",
+        permission: true
+      },
+      {
+        uniqueId: 3,
+        href: "https://dealers.zohosolution.in/crm/tab/CustomModule19/custom-view/3660000002999919/list",
+        iconSrc: "3-green.svg",
+        cvId: "3660000002999919",
+        moduleName: "ZTestDrives",
+        title: ["Today's Testdrive"],
+        count: "NA",
+        permission: true
+      },
+      {
+        uniqueId: 4,
+        href: "https://dealers.zohosolution.in/crm/tab/Tasks/custom-view/3660000000059402/list",
+        iconSrc: "4-green.svg",
+        cvId: "3660000000059402",
+        moduleName: "Tasks",
+        title: ["Overdue Task"],
+        count: "NA",
+        permission: true
+      },
+      {
+        uniqueId: 5,
+        href: "https://dealers.zohosolution.in/crm/tab/Tasks/custom-view/3660000002999930/list",
+        iconSrc: "5-green.svg",
+        cvId: "3660000002999930",
+        moduleName: "Tasks",
+        title: ["Today's Tasks"],
+        count: "NA",
+        permission: true
+      },
+      {
+        uniqueId: 6,
+        href: "https://dealers.zohosolution.in/crm/tab/CustomModule29/custom-view/3660000002999665/list",
+        iconSrc: "6-green.svg",
+        cvId: "3660000002999665",
+        moduleName: "ZProductBookings",
+        title: ["Booking"],
+        count: "NA",
+        permission: true
+      },
+      {
+        uniqueId: 7,
+        href: "https://dealers.zohosolution.in/crm/tab/CustomModule29/custom-view/3660000002999687/list",
+        iconSrc: "7-green.svg",
+        cvId: "3660000002999687",
+        moduleName: "ZProductBookings",
+        title: ["Invoiced"],
+        count: "NA",
+        permission: true
+      },
+      // {
+      //   uniqueId: 8,
+      //   href: "https://dealers.zohosolution.in/crm/tab/CustomModule29/custom-view/3660000000120872/list",
+      //   iconSrc: "8-green.svg",
+      //   cvId: "3660000000120872",
+      //   moduleName: "ZProductBookings",
+      //   title: ["My Bookings"],
+      //   count: "NA",
+      //   permission: true
+      // },
+      {
+        uniqueId: 8,
+        href: "https://dealers.zohosolution.in/crm/tab/CustomModule29/custom-view/3660000002999698/list",
+        iconSrc: "8-green.svg",
+        cvId: "3660000002999698",
+        moduleName: "ZProductBookings",
+        title: ["Delivered"],
+        count: "NA",
+        permission: true
+      },
+    ];
+
+
+
+    function mainInit() {
+
+
+      getUserData().then(function () {
+
+        const initialTheme = (Brand === 'Audi') || (window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        initializeCount().then(function () {
+          populateDashboard(jsonData, initialTheme).then(function () {
+            hideLoaderAndShowContent();
+          }).catch(function (error) {
+            hideLoaderAndShowContent();
+          });
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateAvatarImages);
+        });
+      });
+
+      async function initializeCount() {
+        await Promise.all(
+          jsonData.slice(0, 9).map((item, index) => callApi(item.moduleName, item.cvId, index))
+        );
+      }
+
+
+      function getUserData() {
+        return new Promise(function (resolve, reject) {
+          ZOHO.CRM.CONFIG.getCurrentUser().then(function (data) {
+            var currentName;
+                      if (data.users[0].first_name != null) {
+              currentName = data.users[0].first_name;
+            } else {
+              currentName = data.users[0].full_name;
+            }
+
+            document.getElementById("email").innerText = data.users[0].email;
+            document.getElementById("name").innerText = currentName;
+            document.getElementById("myImage").setAttribute("src", "https://contacts.zoho.in/file?ID=" + data.users[0].zuid)
+
+            ZOHO.CRM.API.getUser({ ID: data.users[0].zuid })
+              .then(function (userData) {
+                Brand = userData.users[0].Brand
+                setTheme();
+                resolve(userData);
+              })
+              .catch(function (error) {
+                reject(error);
+              });
+          })
+            .catch(function (error) {
+              reject(error);
+            });
+        });
+      }
+
+
+      const svgPaths = {
+        "Skoda": "-green.svg",   // Green for skoda
+        "Volkswagen": "-blue.svg",     // Blue for volkswagen
+        "Audi": "-black.svg"    // Black for audi
+      };
+
+      const imageArray = [1, 2, 3, 7, 6, 8, 8, 8, 8];
+
+      function getSvgPath(brand) {
+        return svgPaths[brand] || "-green.svg";  // Default to "-green.svg" if not found
+      }
+      function updateAvatarImages(event) {
+
+        let isDarkMode = (Brand === 'Audi') || (event.matches)
+        avatarImages.forEach((item) => {
+          item.imgElement.src = getAvatarImage(item.iconSrc, isDarkMode);
+        });
+
+        setSrcImg(isDarkMode);
+      }
+
+      function getAvatarImage(iconSrc, isDarkMode) {
+        const parts = iconSrc.split('.');
+        const fileExtension = parts.pop();
+        let baseFileName = parts.join('.');
+        if (isDarkMode) {
+          if (!baseFileName.endsWith('-dark')) {
+            baseFileName += '-dark';
+          }
+        } else {
+          baseFileName = baseFileName.replace(/-dark$/, '');
+        }
+
+        return `${baseFileName}.${fileExtension}`;
+      }
+
+
+      function setTheme() {
+
+        const isDarkMode = (Brand === 'Audi') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        jsonData.forEach((item, index) => {
+          item.iconSrc = Brand + "/" + getAvatarImage((imageArray[index]) + getSvgPath(Brand), isDarkMode);
+        });
+
+        setSrcImg(isDarkMode);
+        addClassList();
+      }
+
+      function addClassList() {
+        document.getElementById("logoMobile").classList.add(Brand + "-logoP-img");
+        document.getElementById("logoTab").classList.add(Brand + "-logoP-img");
+        document.body.classList.add(Brand + "-body");
+        document.getElementById('search_field').classList.add(Brand + "-input");
+        document.getElementById('globalSearch').classList.add(Brand + "-search");
+        document.getElementById('myImage').classList.add(Brand + "-avatarImg");
+        document.getElementById('logoP').classList.add(Brand + "-logoP");
+        document.getElementById('bottom-box').classList.add(Brand + "-bottom-box");
+      }
+
+      function setSrcImg(isDarkMode) {
+        document.getElementById('addLead').src = getAvatarImage(`add_lead${getSvgPath(Brand)}`, isDarkMode);
+        document.getElementById("searchI").src = getAvatarImage(`search${getSvgPath(Brand)}`, isDarkMode);
+        document.getElementById("searchJ").src = getAvatarImage(`search${getSvgPath(Brand)}`, isDarkMode);
+        document.getElementById("logoMobile").src = getAvatarImage(`${Brand}.svg`, isDarkMode);
+        document.getElementById("logoTab").src = getAvatarImage(`${Brand}.svg`, isDarkMode);
+        document.getElementById("searchSmall").src = getAvatarImage('search-small.svg', isDarkMode);
+      }
+
+
+      function hideLoaderAndShowContent() {
+        const loader = document.getElementById("loader");
+        const content = document.getElementById("content");
+
+        loader.style.display = "none";
+        content.style.display = "block";
+      }
+
+
+      function convertURIToImageData(URI) {
+        return new Promise(function (resolve, reject) {
+          if (URI == null) return reject();
+          var canvas = document.createElement('canvas'),
+            context = canvas.getContext('2d'),
+            image = new Image();
+          image.addEventListener('load', function () {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(context.getImageData(0, 0, canvas.width, canvas.height));
+          }, false);
+          image.src = URI;
+        });
+      }
+
+
+      function callApi(moduleName, cvId, index) {
+        return new Promise((resolve, reject) => {
+
+          var url = "https://dealers.zohosolution.in/crm/v6/" + moduleName + "/actions/count?cvid=" + cvId;
+
+          var req_data = {
+            "method": "GET",
+            "url": url,
+            "param_type": 1
+          };
+          var count = 0;
+          try {
+
+            var Mdata = {
+              "module": moduleName,
+              "cvid": cvId
+            }
+
+            ZOHO.CRM.CONNECTOR.invokeAPI("crm.getrecordcount", Mdata)
+              .then(function (data) {
+                var JSOND = JSON.parse(data);
+
+                if (JSOND.status_code === 200) {
+                  var parsedResponse = JSON.parse(JSOND.response);
+                  console.log(parsedResponse);
+                  var count = parsedResponse.count;
+                  jsonData[index].count = count;
+
+                  resolve(count);
+                } else if (JSOND.status_code === 403) {
+                  var errorResponse = JSOND.response
+                  if (errorResponse === "permission denied") {
+                    var permissions = JSOND.details.permissions;
+                    const requiredPermission = "Crm_Implied_Api_Access";
+                    if (permissions.includes(requiredPermission)) {
+                      apiPermissionError = true
+                    }
+                    jsonData[index].permission = false;
+                  }
+                } else if (JSOND.status_code === 400) {
+                  var errorResponse = JSOND.response
+                  if (errorResponse == "invalid data") {
+                    jsonData[index].permission = false;
+                    console.log("invalid data");
+                  } else if (errorResponse == "permission denied to access the module") {
+                    jsonData[index].permission = false;
+                    console.log("permission denied to access the module");
+                  }
+                }
+                // alert("something went wrong card : " + jsonData[index].title)
+                resolve(count);
+              });
+          } catch (e) {
+            console.log("ExceptionOccurred" + e);
+            // alert("something went wrong exception : " + e)
+            jsonData[index].count = "NA";
+            resolve(jsonData[index].count);
+          }
+          return jsonData[index].count;
+        });
+      }
+
+      function populateDashboard(jsonArray, isDarkMode) {
+        return new Promise((resolve, reject) => {
+          try {
+            const container = document.getElementById("dashboard-container");
+            let i = 0;
+            avatarImages = [];
+
+            for (const item of jsonArray) {
+              i++;
+              if (item.permission) {
+                const columnDiv = document.createElement("div");
+                columnDiv.className = "column c1";
+                columnDiv.classList.remove("hover");
+
+                columnDiv.style.webkitTouchCallout = "none";
+                columnDiv.style.webkitUserSelect = "none";
+                columnDiv.style.khtmlUserSelect = "none";
+                columnDiv.style.mozUserSelect = "none";
+                columnDiv.style.msUserSelect = "none";
+                columnDiv.style.userSelect = "none";
+
+
+                const cardLink = document.createElement("a");
+                cardLink.className = "ui card";
+                cardLink.id = "cv-card-" + Brand;
+                cardLink.href = item.href;
+                cardLink.target = "_blank";
+                cardLink.classList.add(Brand + "-uiCard");
+
+                cardLink.setAttribute("draggable", "false");
+
+
+                const contentDiv = document.createElement("div");
+                contentDiv.className = "content";
+
+                const leftFloatedDiv = document.createElement("div");
+                leftFloatedDiv.className = "left floated author";
+                if (Brand != "Audi") {
+                  leftFloatedDiv.setAttribute("style", "margin-left: -11px;")
+                }
+                const avatarImg = document.createElement("img");
+                avatarImg.className = "ui avatar image";
+                avatarImg.id = Brand + "-card-icon-size"
+                avatarImages.push({ imgElement: avatarImg, iconSrc: item.iconSrc });
+                avatarImg.src = item.iconSrc;
+                avatarImg.style.width = "3em";
+                avatarImg.style.height = "3em";
+
+                leftFloatedDiv.appendChild(avatarImg);
+
+                const rightFloatedHeader = document.createElement("div");
+                rightFloatedHeader.className = "ui huge right floated header";
+                rightFloatedHeader.textContent = item.count > 999 ? "999+" : item.count;
+                rightFloatedHeader.setAttribute("style", "color: unset !important;margin-right:0 !important;")
+
+                const descriptionDiv = document.createElement("div");
+                descriptionDiv.className = "description";
+                descriptionDiv.setAttribute("style", "position: absolute; bottom: 16px !important; color: unset !important;");
+
+                const metaDiv = document.createElement("div");
+                metaDiv.className = "meta";
+
+                const categorySpan = document.createElement("span");
+                categorySpan.className = Brand + "-cat category";
+
+                item.title.forEach((line, index) => {
+                  if (index > 0) {
+                    categorySpan.appendChild(document.createElement("br"));
+                  }
+                  categorySpan.appendChild(document.createTextNode(line));
+                });
+
+                metaDiv.appendChild(categorySpan);
+                descriptionDiv.appendChild(metaDiv);
+
+                contentDiv.appendChild(leftFloatedDiv);
+                contentDiv.appendChild(rightFloatedHeader);
+                contentDiv.appendChild(descriptionDiv);
+
+                cardLink.appendChild(contentDiv);
+                columnDiv.appendChild(cardLink);
+
+                container.appendChild(columnDiv);
+              }
+            }
+
+            console.log("populateDashboard completed successfully");
+            if (apiPermissionError) {
+              alert("'Zoho CRM API access' is required to view this page. Please contact your administrator to enable it from Profile>Developer Permissions in Zoho CRM web");
+            }
+            resolve();
+          } catch (error) {
+            console.error("Error populating dashboard:", error);
+            reject(error);
+          }
+        });
+      }
+    }
+    addCustomer = () => {
+      ZOHO.CRM.UI.Record.create({ Entity: "Leads" }).then(function (data) {
+        console.log("record created successfully");
+      });
+    };
+
+    addComplaint = () => {
+      ZOHO.CRM.UI.Record.create({ Entity: "Cases" }).then(function (data) {
+        console.log("record created successfully");
+      });
+    };
+    function scanLicense() {
+      document.getElementById("fileInput").click();
+    }
+
+    ZOHO.embeddedApp.on("PageLoad", function (data) {
+      console.log("PageLoader");
+      mainInit()
+    })
+
+    ZOHO.embeddedApp.init();
+  </script>
+</body>
+
+</html>
