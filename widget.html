@@ -15,7 +15,6 @@
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Helvetica Neue", Helvetica, Arial, sans-serif;
       touch-action: pan-y;
-      scrollbar-color: Transparent !important;
       background-color: white !important;
     }
 
@@ -396,7 +395,7 @@
         background: none;
       } */
 
-    
+
       #cv-card-Skoda,
       #cv-card-Audi {
         color: rgba(229, 229, 229, 1) !important;
@@ -453,7 +452,7 @@
 
       .Volkswagen-bottom-box {
         background-color: rgba(0, 30, 80, 1) !important;
-    }
+      }
 
       /* .Audi-bottom-box {
         background-color: rgba(0, 0, 0, 1) !important;
@@ -691,6 +690,8 @@
           <span style="padding-left: 8px">
             <div class="ui header" id="name" style="margin-bottom: 4px; font-size: 17px; color: unset;"></div>
             <div class="ui meta" id="email" style="font-size: 15px;"></div>
+            <div class="ui meta" id="role" style="font-size: 15px;"></div>
+            <div class="ui meta" id="dealerName" style="font-size: 15px;"></div>
           </span>
           <div class="tab_icon" style="position: absolute; right: 0; left: 0;">
             <img id="logoTab" src="" style="margin: auto; display: flex;" />
@@ -704,7 +705,7 @@
         </div>
       </div>
     </div>
-    <div class="ui segment" id="outer_D">
+        <div class="ui segment" id="outer_D">
       <!-- <div class="ui large header">My Dashboard</div> -->
       <div class="ui two column padded grid" id="dashboard-container">
       </div>
@@ -869,7 +870,7 @@
       getUserData().then(function () {
 
         const initialTheme = (Brand === 'Audi') || (window.matchMedia('(prefers-color-scheme: dark)').matches);
-
+        
         initializeCount().then(function () {
           populateDashboard(jsonData, initialTheme).then(function () {
             hideLoaderAndShowContent();
@@ -882,7 +883,7 @@
 
       async function initializeCount() {
         await Promise.all(
-          jsonData.slice(0, 9).map((item, index) => callApi(item.moduleName, item.cvId, index))
+          jsonData.slice(0, 8).map((item, index) => callApi(item.moduleName, item.cvId, index))
         );
       }
 
@@ -890,26 +891,50 @@
       function getUserData() {
         return new Promise(function (resolve, reject) {
           ZOHO.CRM.CONFIG.getCurrentUser().then(function (data) {
-            var currentName;
-                      if (data.users[0].first_name != null) {
-              currentName = data.users[0].first_name;
-            } else {
-              currentName = data.users[0].full_name;
-            }
-
-            document.getElementById("email").innerText = data.users[0].email;
-            document.getElementById("name").innerText = currentName;
-            document.getElementById("myImage").setAttribute("src", "https://contacts.zoho.in/file?ID=" + data.users[0].zuid)
-
             ZOHO.CRM.API.getUser({ ID: data.users[0].zuid })
               .then(function (userData) {
+                var currentName;
+                if (userData.users[0].first_name != null) {
+                  currentName = userData.users[0].first_name;
+                } else {
+                  currentName = userData.users[0].full_name;
+                }
+
                 Brand = userData.users[0].Brand
-                setTheme();
-                resolve(userData);
-              })
-              .catch(function (error) {
-                reject(error);
-              });
+
+
+                if (Brand !== "Volkswagen") {
+                  document.getElementById("email").innerText = userData.users[0].email;
+                }
+                document.getElementById("name").innerText = currentName;
+                if (Brand === "Volkswagen") {
+                  var roleIcon = Brand + "/vw-profile-icons/" + getAvatarImage("role-icon" + getSvgPath(Brand), getCurrentModeOfTheme());
+                  
+                  document.getElementById('role').innerHTML = `<img class="inline-icon" src="${roleIcon}" alt="email icon" />
+                ${userData.users[0].role.name}
+                `;
+                }
+
+
+                //https://profile.zoho.com/api/v1/user/self/photo
+                document.getElementById("myImage").setAttribute("src", "https://profile.zoho.in/file?ID=" + userData.users[0].zuid)
+
+                ZOHO.CRM.API.searchRecord({ Entity: "Accounts", Type: "criteria", Query: "(Dealer_Code:equals:" + userData.users[0].Dealer_Code + ")" })
+                  .then(function (data) {
+                    var dealerName = data.data[0].Dealer_Name;
+                    if (Brand === "Volkswagen" && dealerName != null) {
+                      var dealerIcon = Brand + "/vw-profile-icons/" + getAvatarImage("dealername-icon" + getSvgPath(Brand), getCurrentModeOfTheme());
+                      document.getElementById('dealerName').innerHTML = `<img class="inline-icon" src="${dealerIcon}" alt="email icon" />
+                ${dealerName}
+                `;
+                    }
+
+                    setTheme();
+                    resolve(userData);
+                  })
+                  .catch(function (error) {
+                    reject(error);
+                  });
           })
             .catch(function (error) {
               reject(error);
@@ -954,11 +979,13 @@
         return `${baseFileName}.${fileExtension}`;
       }
 
+      function getCurrentModeOfTheme() {
+        return (Brand === 'Audi') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      }
 
       function setTheme() {
 
-        const isDarkMode = (Brand === 'Audi') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
+        const isDarkMode = getCurrentModeOfTheme();
         jsonData.forEach((item, index) => {
           item.iconSrc = Brand + "/" + getAvatarImage((imageArray[index]) + getSvgPath(Brand), isDarkMode);
         });
@@ -1177,6 +1204,7 @@
     addCustomer = () => {
       ZOHO.CRM.UI.Record.create({ Entity: "Leads" }).then(function (data) {
         console.log("record created successfully");
+        location.reload();
       });
     };
 
